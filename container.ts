@@ -55,6 +55,7 @@ export class Container {
         if (!isNil(serviceMetadata.factoryClass)) {
             const factory = this.has(serviceMetadata.factoryClass)
                 ? this.get(serviceMetadata.factoryClass)
+                // eslint-disable-next-line new-cap
                 : new serviceMetadata.factoryClass()
             return factory.create(this)
         }
