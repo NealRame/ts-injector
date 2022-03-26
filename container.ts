@@ -27,8 +27,9 @@ import {
 } from "./utils"
 
 export class Container {
-    private aliases_ = new WeakMap<Token, TConstructor>()
-    private values_ = new WeakMap<Token, unknown>()
+    private aliases_ = new Map<Token | symbol, TConstructor>()
+
+    private values_ = new Map<Token | symbol, unknown>()
     private singletons_ = new WeakMap<TConstructor, unknown>()
 
     private injectServiceParameters_(service: TConstructor) {
@@ -87,7 +88,7 @@ export class Container {
         throw new ServiceNotFoundError(service)
     }
 
-    private injectAliasedService_<T>(service: Token<T>)
+    private injectAliasedService_<T = unknown>(service: Token<T> | symbol)
         : T {
         const classService = this.aliases_.get(service)
         if (isNil(classService)) {
@@ -98,15 +99,15 @@ export class Container {
 
     has(id: ServiceIdentifier)
         : boolean {
-        if (Token.isToken(id)) {
+        if (Token.isToken(id) || typeof id === "symbol") {
             return this.values_.has(id) || this.aliases_.has(id)
         }
         return isService(id)
     }
 
-    get<T>(id: ServiceIdentifier<T>, fallback?: T)
+    get<T = unknown>(id: ServiceIdentifier<T>, fallback?: T)
         : T {
-        if (Token.isToken(id)) {
+        if (Token.isToken(id) || typeof id === "symbol") {
             if (this.values_.has(id)) {
                 return this.values_.get(id) as T
             }
@@ -121,7 +122,7 @@ export class Container {
         return this.injectClassService_(id, fallback)
     }
 
-    set<T>(token: Token<T>, value: T | TConstructor<T>)
+    set<T = unknown>(token: Token<T> | symbol, value: T | TConstructor<T>)
         : this {
         if (typeof value === "function" && isService(value)) {
             this.aliases_.set(token, value as TConstructor<T>)
