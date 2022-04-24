@@ -106,6 +106,13 @@ export class Container {
         return isService(id)
     }
 
+    remove(token: Token | symbol)
+        : this {
+        this.values_.delete(token)
+        this.aliases_.delete(token)
+        return this
+    }
+
     get<T = unknown>(id: ServiceIdentifier<T>, fallback?: T)
         : T {
         if (Token.isToken(id) || typeof id === "symbol") {
@@ -130,13 +137,6 @@ export class Container {
         } else {
             this.values_.set(token, value)
         }
-        return this
-    }
-
-    remove(token: Token | symbol)
-        : this {
-        this.values_.delete(token)
-        this.aliases_.delete(token)
         return this
     }
 }
