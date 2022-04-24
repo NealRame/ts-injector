@@ -132,4 +132,11 @@ export class Container {
         }
         return this
     }
+
+    remove(token: Token | symbol)
+        : this {
+        this.values_.delete(token)
+        this.aliases_.delete(token)
+        return this
+    }
 }
