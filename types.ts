@@ -1,14 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Token } from "./token"
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface TConstructor<T = any> {
-    new(...args: Array<never>): T
+    new(...args: Array<any>): T
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ServiceIdentifier<T = any> = TConstructor<T> | Token<T> | symbol
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ServiceParameterMetadata<T = any> = {
     service?: ServiceIdentifier<T>,
     fallback?: T,
