@@ -6,6 +6,7 @@ import {
 
 import {
     ServiceMetadata,
+    ServiceLifecycle,
     TConstructor,
 } from "./types"
 
@@ -28,4 +29,19 @@ export function getServiceMetadata(service: TConstructor)
         return Reflect.getMetadata(ServiceMetadataKey, service)
     }
     throw new ServiceNotFoundError(service)
+}
+
+export function getOrCreateServiceMetadata(service: TConstructor)
+    : ServiceMetadata {
+    if (!isService(service)) {
+        Reflect.defineMetadata(
+            ServiceMetadataKey,
+            {
+                lifecycle: ServiceLifecycle.Transient,
+                parameters: new Map(),
+            },
+            service
+        )
+    }
+    return getServiceMetadata(service)
 }
