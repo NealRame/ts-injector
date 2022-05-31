@@ -48,9 +48,8 @@ export class ServiceAliasOrValueUndefined extends Error {
 
     get message()
         : string {
-        const name = Token.isToken(this.id_) ? this.id_.name : this.id_.toString()
         return (
-            `Service alias or value "${name}" is undefined.`
+            `Service alias or value "${this.id_.toString()}" is undefined.`
             + " Register it before usage by calling 'Container#set' method."
         )
     }

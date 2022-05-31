@@ -27,9 +27,9 @@ import {
 } from "./utils"
 
 export class Container {
-    private aliases_ = new Map<Token | symbol, TConstructor>()
+    private aliases_ = new Map<symbol, TConstructor>()
 
-    private values_ = new Map<Token | symbol, unknown>()
+    private values_ = new Map<symbol, unknown>()
     private singletons_ = new WeakMap<TConstructor, unknown>()
 
     private injectServiceParameters_(service: TConstructor) {
@@ -91,7 +91,7 @@ export class Container {
 
     private injectAliasedService_<T = unknown>(service: Token<T> | symbol)
         : T {
-        const classService = this.aliases_.get(service)
+        const classService = this.aliases_.get(service as symbol)
         if (isNil(classService)) {
             throw new ContainerInternalError()
         }
@@ -100,22 +100,23 @@ export class Container {
 
     has(id: ServiceIdentifier)
         : boolean {
-        if (Token.isToken(id) || typeof id === "symbol") {
+        if (typeof id === "symbol") {
             return this.values_.has(id) || this.aliases_.has(id)
         }
-        return isService(id)
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        return isService(id as TConstructor)
     }
 
     remove(token: Token | symbol)
         : this {
-        this.values_.delete(token)
-        this.aliases_.delete(token)
+        this.values_.delete(token as symbol)
+        this.aliases_.delete(token as symbol)
         return this
     }
 
     get<T = unknown>(id: ServiceIdentifier<T>, fallback?: T)
         : T {
-        if (Token.isToken(id) || typeof id === "symbol") {
+        if (typeof id === "symbol") {
             if (this.values_.has(id)) {
                 return this.values_.get(id) as T
             }
@@ -127,15 +128,15 @@ export class Container {
             }
             throw new ServiceAliasOrValueUndefined(id)
         }
-        return this.injectClassService_(id, fallback)
+        return this.injectClassService_(id as TConstructor<T>, fallback)
     }
 
     set<T = unknown>(token: Token<T> | symbol, value: T | TConstructor<T>)
         : this {
         if (typeof value === "function" && isService(value)) {
-            this.aliases_.set(token, value as TConstructor<T>)
+            this.aliases_.set(token as symbol, value as TConstructor<T>)
         } else {
-            this.values_.set(token, value)
+            this.values_.set(token as symbol, value)
         }
         return this
     }

@@ -1,18 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Token are used to alias registered service or set value into a container.
+ * Token is a typed version of Symbol.
+ * Tokens are used to alias registered service or set value into a container.
  */
-export class Token<T = any> {
-    static isToken(item: any)
-        : item is Token {
-        return item instanceof Token
-    }
-
-    constructor(private name_: string) {}
-
-    get name(): string {
-        return this.name_
-    }
-}
+export interface Token<T = unknown> extends Symbol {}
