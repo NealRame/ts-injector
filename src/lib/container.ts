@@ -1,7 +1,5 @@
 import "reflect-metadata"
 
-import { isNil } from "lodash"
-
 import {
     ContainerInternalError,
     ServiceAliasOrValueUndefined,
@@ -25,6 +23,10 @@ import {
     getServiceParametersMetadata,
     isService,
 } from "./utils"
+
+function isNil(v: any): v is null | undefined {
+    return v == null
+}
 
 export class Container {
     private aliases_ = new Map<symbol, TConstructor>()
