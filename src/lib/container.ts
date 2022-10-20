@@ -24,6 +24,7 @@ import {
     isService,
 } from "./utils"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isNil(v: any): v is null | undefined {
     return v == null
 }
