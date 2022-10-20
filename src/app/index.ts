@@ -184,15 +184,14 @@ building.repair()
 building.repair()
 
 const land1 = container.get(Land)
+const landId1: Token<Land> = Symbol("land1")
 
-const landId = Symbol("land")
+container.set(landId1, land1)
+logger.log(`land1 size is width=${(container.get(landId1)).width} height=${(container.get(landId1)).height}`)
 
-container.set(landId, land1)
-logger.log(`land size is width=${(container.get(landId) as Land).width} height=${(container.get(landId) as Land).height}`)
-
-container.remove(landId)
+container.remove(landId1)
 try {
-    container.get(landId)
+    container.get(landId1)
 } catch (e) {
     if (e instanceof ServiceAliasOrValueUndefined) {
         logger.log("land is removed")
@@ -200,7 +199,10 @@ try {
 }
 
 const land2 = container.get(Land)
-container.set(landId, land2)
+const landId2 = Symbol("land2")
+
+container.set(landId2, land2)
+logger.log(`land2 size is width=${(container.get(landId2) as Land).width} height=${(container.get(landId2) as Land).height}`)
 
 logger.log(`land1 !== land2 ${land1 !== land2}`)
-logger.log(`land2 === container.get(landId) ${land2 === container.get(landId)}`)
+logger.log(`land2 === container.get(landId2) ${land2 === container.get(landId2)}`)
