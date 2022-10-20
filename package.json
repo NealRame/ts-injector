@@ -11,7 +11,22 @@
   "scripts": {
     "build": "./scripts/build.sh",
     "clean": "./scripts/clean.sh",
-    "test": "./scripts/test-unit.sh"
+    "test": "./scripts/test-unit.sh",
+    "test-app": "./scripts/test-app.sh",
+    "test-unit": "./scripts/test-unit.sh",
+    "watch-app": "npm-watch test-app",
+    "watch-unit": "npm-watch test"
+  },
+  "watch": {
+    "test-app": {
+      "patterns": [
+        "src/app/**/*",
+        "src/lib/**/*"
+      ],
+      "extensions": "ts",
+      "ignore": "src/**/*.spec.ts",
+      "quiet": true
+    }
   },
   "repository": {
     "type": "git",
@@ -36,6 +51,7 @@
     "chai": "^4.3.6",
     "eslint": "^8.25.0",
     "mocha": "^10.1.0",
+    "npm-watch": "^0.11.0",
     "ts-node": "^10.9.1",
     "tslib": "^1.14.1",
     "typescript": "^4.8.4"
