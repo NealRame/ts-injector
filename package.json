@@ -20,11 +20,19 @@
   "watch": {
     "test-app": {
       "patterns": [
-        "src/app/**/*",
-        "src/lib/**/*"
+        "src/lib/**/*",
+        "src/app/**/*"
       ],
       "extensions": "ts",
       "ignore": "src/**/*.spec.ts",
+      "quiet": true
+    },
+    "test-unit": {
+      "patterns": [
+        "src/lib/**/*",
+        "src/tests/**/*"
+      ],
+      "extensions": "ts",
       "quiet": true
     }
   },
