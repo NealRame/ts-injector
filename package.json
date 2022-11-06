@@ -15,7 +15,7 @@
     "test-app": "./scripts/test-app.sh",
     "test-unit": "./scripts/test-unit.sh",
     "watch-app": "npm-watch test-app",
-    "watch-unit": "npm-watch test"
+    "watch-unit": "npm-watch test-unit"
   },
   "watch": {
     "test-app": {
