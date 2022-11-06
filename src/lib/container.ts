@@ -80,13 +80,20 @@ export class Container {
 
     private injectClassService_<T>(service: TConstructor<T>, fallback?: T)
         : T {
+        // inject the container itself if a Container is required
+        if (service === Container) {
+            return this as unknown as T
+        }
+        // inject the service if registered
         if (isService(service)) {
             const metadata = getServiceMetadata(service)
             return (metadata.lifecycle === ServiceLifecycle.Singleton
                 ? this.injectSingleton_(service, metadata)
                 : this.injectTransient_(service, metadata)
             ) as T
-        } else if (!isNil(fallback)) {
+        }
+        // fallback to the provided value if given
+        if (!isNil(fallback)) {
             return fallback
         }
         throw new ServiceNotFoundError(service)
