@@ -7,6 +7,7 @@ import {
     ServiceLifecycle,
     ServiceAliasOrValueUndefined,
     Token,
+    getServiceMetadata,
 } from "../lib"
 
 enum LogLevel {
@@ -90,10 +91,12 @@ class Logger {
 
 @Service({ lifecycle: ServiceLifecycle.Transient })
 class Unit {
+    @Inject(loggerToken)
+    public logger: Logger
+
     constructor(
         @Default(3.14) private x_: number,
         @Default(1.41) private y_: number,
-        @Inject(loggerToken) public logger: Logger,
     ) { }
 
     get position()
@@ -112,6 +115,8 @@ class Unit {
         return this
     }
 }
+
+console.log("UNIT", getServiceMetadata(Unit))
 
 class Building {
     private x_: number
