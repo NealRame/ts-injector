@@ -39,6 +39,7 @@ export function getOrCreateServiceMetadata(service: TConstructor)
             {
                 lifecycle: ServiceLifecycle.Transient,
                 parameters: new Map(),
+                properties: new Map(),
             },
             service
         )

@@ -22,4 +22,5 @@ export interface ServiceMetadata {
     factoryClass?: TConstructor,
     factoryFunction?: CallableFunction,
     parameters: Map<number, ServiceParameterMetadata>,
+    properties: Map<string, ServiceIdentifier>,
 }
