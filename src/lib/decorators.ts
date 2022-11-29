@@ -24,20 +24,30 @@ export function Service(metadata?: Partial<Omit<ServiceMetadata, "parameters">>)
     }
 }
 
-export function Inject(service: ServiceIdentifier)
-    : ParameterDecorator {
-    return (target: any, _: any, parameterIndex: number) => {
-        const { parameters } = getOrCreateServiceMetadata(target)
-        parameters.set(parameterIndex, {
-            ...parameters.get(parameterIndex),
-            service,
-        })
+export function Inject(service: ServiceIdentifier) {
+    return (
+        target: any,
+        propertyKey: string | symbol,
+        parameterIndex?: number,
+    ) => {
+        if (typeof parameterIndex === "number") {
+            const { parameters } = getOrCreateServiceMetadata(target as TConstructor)
+            parameters.set(parameterIndex, {
+                ...parameters.get(parameterIndex),
+                service,
+            })
+        } else {
+            target = target.constructor
+            const { properties } = getOrCreateServiceMetadata(target as TConstructor)
+            properties.set(propertyKey as string, service)
+        }
     }
 }
 
 export function Default(fallback: boolean | number | string | symbol)
     : ParameterDecorator {
     return (target: any, _: any, parameterIndex: number) => {
+        console.log("Default Parameter", target, parameterIndex, fallback)
         const { parameters } = getOrCreateServiceMetadata(target)
         parameters.set(parameterIndex, {
             ...parameters.get(parameterIndex),
