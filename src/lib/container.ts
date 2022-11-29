@@ -67,6 +67,10 @@ export class Container {
 
     private injectServiceProperties_(
         service: TConstructor,
+        // We need to use any here because we can't know the type of the type
+        // of the instance. However, we know by construction that the instance
+        // is an instance of the service. So we can safely use any here.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         instance: any,
     ) {
         // Get service injectable properties metadata
