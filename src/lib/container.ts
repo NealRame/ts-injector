@@ -46,6 +46,11 @@ export class Container {
                 if (!isNil(parameterMeta.service)) {
                     return this.get(parameterMeta.service, parameterMeta.fallback)
                 }
+                // We do not have a service to inject, but maybe we have a
+                // default value.
+                if (!isNil(parameterMeta.fallback)) {
+                    return parameterMeta.fallback
+                }
             }
             return type()
         })
