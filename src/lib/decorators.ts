@@ -47,7 +47,6 @@ export function Inject(service: ServiceIdentifier) {
 export function Default(fallback: boolean | number | string | symbol)
     : ParameterDecorator {
     return (target: any, _: any, parameterIndex: number) => {
-        console.log("Default Parameter", target, parameterIndex, fallback)
         const { parameters } = getOrCreateServiceMetadata(target)
         parameters.set(parameterIndex, {
             ...parameters.get(parameterIndex),
