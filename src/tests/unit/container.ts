@@ -2,18 +2,18 @@ import { expect } from "chai"
 
 
 
-import { Container } from "../lib/container"
-import { Service } from "../lib/decorators"
+import { Container } from "../../lib/container"
+import { Service } from "../../lib/decorators"
 import {
     ServiceNotFoundError,
     ServiceAliasOrValueUndefined
-} from "../lib/errors"
+} from "../../lib/errors"
 import {
     Token,
-} from "../lib/token"
+} from "../../lib/token"
 import {
     ServiceLifecycle,
-} from "../lib/types"
+} from "../../lib/types"
 
 
 describe("Container", () => {

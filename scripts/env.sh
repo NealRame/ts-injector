@@ -13,4 +13,4 @@ if [ -f "$DOTENV_FILE" ]; then
     source "$DOTENV_FILE"
 fi
 
-TEST_APPS=${TEST_APPS:-$(cd "$SOURCE_DIR/src/app"; find . -type d -name "app*" | tr "$'\n'" ":")}
+TEST_APPS=${TEST_APPS:-$(cd "$SOURCE_DIR/src/tests/app"; find . -type d -name "app*" | tr "$'\n'" ":")}
