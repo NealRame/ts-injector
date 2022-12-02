@@ -7,7 +7,7 @@ import {
     ServiceLifecycle,
     ServiceAliasOrValueUndefined,
     Token,
-} from "../lib"
+} from "../../lib"
 
 enum LogLevel {
     Error,
@@ -174,52 +174,50 @@ class Land {
     }
 }
 
-export default function() {
-    const container = new Container()
+const container = new Container()
 
-    container
-        .set(loggerLevel, LogLevel.Debug)
-        .set(loggerToken, Logger)
-    
-    const logger = container.get(Logger)
-    
-    
-    logger.log("core: a core message")
-    
-    const unit = container.get(Unit)
-    unit.move({ x: 1, y: 2 })
-    unit.move({ x: 2, y: 2 })
-    unit.move({ x: 3, y: 3 })
-    
-    const building = container.get(Building)
-    building.repair()
-    building.repair()
-    building.repair()
-    
-    const land1 = container.get(Land)
-    const landId1: Token<Land> = Symbol("land1")
-    
-    container.set(landId1, land1)
-    logger.log(`land1 size is width=${(container.get(landId1)).width} height=${(container.get(landId1)).height}`)
-    
-    container.remove(landId1)
-    try {
-        container.get(landId1)
-    } catch (e) {
-        if (e instanceof ServiceAliasOrValueUndefined) {
-            logger.log("land is removed")
-        }
+container
+    .set(loggerLevel, LogLevel.Debug)
+    .set(loggerToken, Logger)
+
+const logger = container.get(Logger)
+
+
+logger.log("core: a core message")
+
+const unit = container.get(Unit)
+unit.move({ x: 1, y: 2 })
+unit.move({ x: 2, y: 2 })
+unit.move({ x: 3, y: 3 })
+
+const building = container.get(Building)
+building.repair()
+building.repair()
+building.repair()
+
+const land1 = container.get(Land)
+const landId1: Token<Land> = Symbol("land1")
+
+container.set(landId1, land1)
+logger.log(`land1 size is width=${(container.get(landId1)).width} height=${(container.get(landId1)).height}`)
+
+container.remove(landId1)
+try {
+    container.get(landId1)
+} catch (e) {
+    if (e instanceof ServiceAliasOrValueUndefined) {
+        logger.log("land is removed")
     }
-    
-    const land2 = container.get(Land)
-    const landId2 = Symbol("land2")
-    
-    container.set(landId2, land2)
-    logger.log(`land2 size is width=${(container.get(landId2) as Land).width} height=${(container.get(landId2) as Land).height}`)
-    
-    logger.log(`land1 !== land2 ${land1 !== land2}`)
-    logger.log(`land2 === container.get(landId2) ${land2 === container.get(landId2)}`)
-    
-    const tank = container.get(Tank)
-    tank.shot()
 }
+
+const land2 = container.get(Land)
+const landId2 = Symbol("land2")
+
+container.set(landId2, land2)
+logger.log(`land2 size is width=${(container.get(landId2) as Land).width} height=${(container.get(landId2) as Land).height}`)
+
+logger.log(`land1 !== land2 ${land1 !== land2}`)
+logger.log(`land2 === container.get(landId2) ${land2 === container.get(landId2)}`)
+
+const tank = container.get(Tank)
+tank.shot()
