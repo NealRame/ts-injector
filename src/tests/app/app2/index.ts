@@ -7,7 +7,7 @@ import {
     ServiceLifecycle,
     ServiceAliasOrValueUndefined,
     Token,
-} from "../../lib"
+} from "../../../lib"
 
 enum LogLevel {
     Error,

@@ -1,12 +1,12 @@
 import { expect } from "chai"
 
-import { Service } from "../../lib/decorators"
+import { Service } from "../../../lib/decorators"
 import {
     ServiceLifecycle,
-} from "../../lib/types"
+} from "../../../lib/types"
 import {
     getServiceMetadata,
-} from "../../lib/utils"
+} from "../../../lib/utils"
 
 describe("@Service", () => {
     it("is a decorator factory", () => {

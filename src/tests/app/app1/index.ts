@@ -3,7 +3,7 @@ import {
     Container,
     Inject,
     Service,
-} from "../../lib"
+} from "../../../lib"
 
 @Service()
 class A {

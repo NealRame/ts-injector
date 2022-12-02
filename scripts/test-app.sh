@@ -12,7 +12,7 @@ source "$SCRIPTS_DIR/env.sh"
 
 IFS=$':' read -r -a APPS <<< "$TEST_APPS"
 for APP in "${APPS[@]}"; do
-    APP_PATH="$SOURCE_DIR/src/app/$APP/index.ts"
+    APP_PATH="$SOURCE_DIR/src/tests/app/$APP/index.ts"
     echo "===================================================================="
     echo "Testing $APP"
     echo "===================================================================="

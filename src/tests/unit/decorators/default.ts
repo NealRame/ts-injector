@@ -2,29 +2,25 @@ import { expect } from "chai"
 
 import {
     getServiceMetadata,
-    Inject,
+    Default,
     Service,
-    Token,
-} from "../../lib/"
+} from "../../../lib"
 
-describe("@Inject", () => {
+describe("@Default", () => {
     it("is a decorator factory", () => {
         expect(Service).to.be.a("function")
         expect(Service()).to.be.a("function")
     })
     it("adds metadata to the decorated class", () => {
-        @Service()
-        class Service1Class {}
-        const Service1: Token<Service1Class> = Symbol("Service1ClassAlias") 
-        class Service2Class {
+        class ServiceClass {
             constructor(
-                @Inject(Service1) public service1: Service1Class,
+                @Default("test") public value: string,
             ) {}
         }
-        const metadata = getServiceMetadata(Service2Class)
+        const metadata = getServiceMetadata(ServiceClass)
         expect(metadata).to.have.property("parameters")
         expect(metadata.parameters.get(0)).to.deep.equal({
-            service: Service1,
+            fallback: "test",
         })
     })
 })
