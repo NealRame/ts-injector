@@ -33,16 +33,19 @@ export function getServiceMetadata(service: TConstructor)
 
 export function getOrCreateServiceMetadata(service: TConstructor)
     : ServiceMetadata {
-    if (!isService(service)) {
-        Reflect.defineMetadata(
-            ServiceMetadataKey,
-            {
-                lifecycle: ServiceLifecycle.Transient,
-                parameters: new Map(),
-                properties: new Map(),
-            },
-            service
-        )
+    let metadata = Reflect.getMetadata(ServiceMetadataKey, service)
+
+    if (metadata != null && (metadata as ServiceMetadata).service === service) {
+        return metadata
     }
-    return getServiceMetadata(service)
+
+    metadata = {
+        lifecycle: ServiceLifecycle.Transient,
+        parameters: new Map(metadata?.parameters ?? []),
+        properties: new Map(metadata?.properties ?? []),
+        service,
+    }
+
+    Reflect.defineMetadata(ServiceMetadataKey, metadata, service)
+    return metadata
 }
