@@ -12,10 +12,11 @@ class A {
     }
 }
 
-@Service()
-abstract class B {
+class B {
     @Inject(A) public a: A
-    abstract mB(): void
+    mB() {
+        console.log("B::mB called")
+    }
 }
 
 @Service()
@@ -25,16 +26,21 @@ class C {
     }
 }
 
-@Service()
 class D extends B {
     @Inject(C) public c: C
-    mB() {
-        console.log("C::mB called")
-    }
 }
 
 const container = new Container()
+
+console.log("Check D")
 const d = container.get(D)
-d.mB()
+console.log(d)
 d.a.mA()
+d.mB()
 d.c.mC()
+console.log("----------------------")
+
+console.log("Check B")
+const b = container.get(B)
+console.log(b)
+b.mB()
