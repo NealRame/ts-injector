@@ -11,10 +11,10 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/src/app/app1/index.ts",
+            "program": "${workspaceFolder}/src/tests/app/app1/index.ts",
             "preLaunchTask": "tsc: app1",
             "outFiles": [
-                "${workspaceFolder}/**/*.js"
+                "${workspaceFolder}/src/tests/app/app1/dist/**/*.js"
             ]
         },
         {
@@ -24,10 +24,10 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/src/app/app2/index.ts",
+            "program": "${workspaceFolder}/src/tests/app/app2/index.ts",
             "preLaunchTask": "tsc: app2",
             "outFiles": [
-                "${workspaceFolder}/**/*.js"
+                "${workspaceFolder}/src/tests/app/app1/dist/**/*.js"
             ]
         }
     ]

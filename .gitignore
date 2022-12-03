@@ -1,6 +1,6 @@
 /**/.npmrc
 /**/.DS_Store
+/**/dist
 
 /.env
-/dist
 /node_modules
