@@ -1,6 +1,6 @@
 {
   "name": "@nealrame/ts-injector",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "A simple Dependency Injection library for Typescript",
   "main": "./dist/index.js",
   "files": [
