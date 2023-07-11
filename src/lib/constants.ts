@@ -1,1 +1,4 @@
-export const ServiceMetadataKey = Symbol("service:metadata")
+export enum ServiceLifecycle {
+    Singleton,
+    Transient,
+}

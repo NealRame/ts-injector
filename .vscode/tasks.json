@@ -3,21 +3,48 @@
     "tasks": [
         {
             "type": "typescript",
-            "tsconfig": "src/tests/app/app1/tsconfig.json",
+            "tsconfig": "src/tests/apps/1/tsconfig.json",
             "problemMatcher": [
                 "$tsc"
             ],
             "group": "build",
-            "label": "tsc: app1"
+            "label": "app1"
         },
         {
             "type": "typescript",
-            "tsconfig": "src/tests/app/app2/tsconfig.json",
+            "tsconfig": "src/tests/apps/2/tsconfig.json",
             "problemMatcher": [
                 "$tsc"
             ],
             "group": "build",
-            "label": "tsc: app2"
+            "label": "app2"
+        },
+        {
+            "type": "typescript",
+            "tsconfig": "src/tests/apps/3/tsconfig.json",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "group": "build",
+            "label": "app3"
+        },
+        {
+            "type": "typescript",
+            "tsconfig": "src/tests/apps/4/tsconfig.json",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "group": "build",
+            "label": "app4"
+        },
+        {
+            "type": "typescript",
+            "tsconfig": "src/tests/apps/5/tsconfig.json",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "group": "build",
+            "label": "app5"
         }
     ]
 }

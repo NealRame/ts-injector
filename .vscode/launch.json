@@ -7,27 +7,79 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Test App1",
+            "name": "Launch Test App 1",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/src/tests/app/app1/index.ts",
-            "preLaunchTask": "tsc: app1",
+            "program": "${workspaceFolder}/src/tests/apps/1/index.ts",
+            "preLaunchTask": "app1",
             "outFiles": [
-                "${workspaceFolder}/src/tests/app/app1/dist/**/*.js"
+                "${workspaceFolder}/src/tests/apps/1/dist/**/*.js"
             ]
         },
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Test App2",
+            "name": "Launch Test App 2",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/src/tests/app/app2/index.ts",
-            "preLaunchTask": "tsc: app2",
+            "program": "${workspaceFolder}/src/tests/apps/2/index.ts",
+            "preLaunchTask": "app2",
             "outFiles": [
-                "${workspaceFolder}/src/tests/app/app1/dist/**/*.js"
+                "${workspaceFolder}/src/tests/apps/2/dist/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Test App 3",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/tests/apps/3/index.ts",
+            "preLaunchTask": "app3",
+            "outFiles": [
+                "${workspaceFolder}/src/tests/apps/3/dist/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Test App 4",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/tests/apps/4/index.ts",
+            "preLaunchTask": "app4",
+            "outFiles": [
+                "${workspaceFolder}/src/tests/apps/4/dist/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Test App 5",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/tests/apps/5/index.ts",
+            "preLaunchTask": "app5",
+            "outFiles": [
+                "${workspaceFolder}/src/tests/apps/5/dist/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Test App 6",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/tests/apps/6/index.ts",
+            "preLaunchTask": "app5",
+            "outFiles": [
+                "${workspaceFolder}/src/tests/apps/6/dist/**/*.js"
             ]
         }
     ]
