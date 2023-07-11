@@ -1,16 +1,10 @@
 {
   "compilerOptions": {
-    "target": "esnext",
     "module": "commonjs",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
+    "target": "es6",
+    "allowJs": true,
     "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "outDir": "out",
     "baseUrl": ".",
@@ -27,7 +21,8 @@
     ]
   },
   "include": [
-    "**/*.ts",
+    "**/*.spec.ts",
+    "../lib/**/*.ts",
   ],
   "exclude": [
     "node_modules"

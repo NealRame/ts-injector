@@ -1,27 +1,44 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Token } from "./token"
 
-export interface TConstructor<T = any> {
-    new(...args: Array<any>): T
-}
+import {
+    ServiceLifecycle,
+} from "./constants"
 
-export type ServiceIdentifier<T = any> = TConstructor<T> | Token<T> | symbol
+import type {
+    Token,
+} from "./token"
 
-export type ServiceParameterMetadata<T = any> = {
-    service?: ServiceIdentifier<T>,
-    fallback?: T,
-}
+/**
+ * Constructor type.
+ */
+export type TConstructor<T = any> = new(...args: Array<any>) => T
 
-export enum ServiceLifecycle {
-    Singleton,
-    Transient,
-}
+/**
+ * Service identifier.
+ * It can be a class, a function or a symbol.
+ */
+export type TServiceIdentifier<T = any> = TConstructor<T> | Token<T> | symbol
 
-export interface ServiceMetadata {
-    lifecycle: ServiceLifecycle,
-    factoryClass?: TConstructor,
-    factoryFunction?: CallableFunction,
-    parameters: Map<number, ServiceParameterMetadata>,
-    properties: Map<string, ServiceIdentifier>,
-    service?: TConstructor,
+/**
+ * Service option.
+ */
+export type TServiceOption<T = unknown> = {
+    /**
+     * Service factory class.
+     */
+    factoryClass?: TConstructor
+    /**
+     * Service factory function.
+     */
+    factoryFunction?: CallableFunction
+    /**
+     * Service lifecycle.
+     * @default ServiceLifecycle.Transient
+     */
+    lifecycle?: ServiceLifecycle
+    /**
+     * 
+     */
+    alias?: Token<T>
 }

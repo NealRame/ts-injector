@@ -1,8 +1,8 @@
 {
-    "mochaExplorer.files": "src/tests/spec/**/*.ts",
+    "mochaExplorer.files": "src/tests/**/*.spec.ts",
     "mochaExplorer.env": {
       "NODE_ENV": "test",
-      "TS_NODE_PROJECT": "src/tests/spec/tsconfig.json"
+      "TS_NODE_PROJECT": "src/tests/tsconfig.json"
     },
     "mochaExplorer.require": "ts-node/register",
     "typescript.tsdk": "node_modules/typescript/lib"

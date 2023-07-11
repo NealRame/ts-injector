@@ -3,4 +3,5 @@
 /**/dist
 
 /.env
+/docs
 /node_modules

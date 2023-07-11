@@ -2,18 +2,25 @@ import {
     Token,
 } from "./token"
 
-import {
-    TConstructor,
-} from "./types"
-
 /**
- * Thrown when an incoherent event happened.
+ * Thrown when requested alias or value was not found.
  */
-export class ContainerInternalError extends Error {
-    public name = "ContainerInternalError"
-    get message()
-        : string {
-        return "Container internal error"
+export class AliasOrValueUndefined extends Error {
+    public name = "ServiceAliasOrValueUndefined"
+
+    /**
+     * @param token a token service identifier.
+     */
+    constructor(
+        private _token: Token | symbol,
+    ) { super() }
+
+    /**
+     * @returns the error message.
+     */
+    get message(): string {
+        return `Service alias or value "${this._token.toString()}" is undefined.`
+            + " Register it before usage by calling 'Container#alias'or 'Container#set' method."
     }
 }
 
@@ -23,34 +30,18 @@ export class ContainerInternalError extends Error {
 export class ServiceNotFoundError extends Error {
     public name = "ServiceNotFoundError"
 
+    /**
+     * @param serviceName a service name.
+     */
     constructor(
-        private service_: TConstructor,
+        private _serviceName: string,
     ) { super() }
 
-    get message()
-        : string {
-        return (
-            `Service "${this.service_.name}" was not found.`
-            + " Register it before usage using the '@Service()' decorator."
-        )
-    }
-}
-
-/**
- * Thrown when requested alias was not found.
- */
-export class ServiceAliasOrValueUndefined extends Error {
-    public name = "ServiceAliasOrValueUndefined"
-
-    constructor(
-        private id_: Token | symbol,
-    ) { super() }
-
-    get message()
-        : string {
-        return (
-            `Service alias or value "${this.id_.toString()}" is undefined.`
-            + " Register it before usage by calling 'Container#set' method."
-        )
+    /**
+     * @returns the error message.
+     */
+    get message(): string {
+        return `Service "${this._serviceName}" was not found.`
+            + " Register it before usage using '@Container.service()' decorator."
     }
 }
