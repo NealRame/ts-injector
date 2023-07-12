@@ -1,17 +1,31 @@
 #! /usr/bin/env bash
 
-BASE_DIR="${BASE_DIR:-$PWD}"
-OUTPUT_DIR="${OUTPUT_DIR:-"${BASE_DIR}/docs"}"
+set -e
+set -o pipefail
+set -u
 
-rm -fr "$OUTPUT_DIR"
+export BASE_DIR="${BASE_DIR:-$PWD}"
+export OUTPUT_DIR="${OUTPUT_DIR:-"${BASE_DIR}/wiki"}"
+export PATH="$PWD/node_modules/.bin:$PATH"
 
-PATH="$PWD/node_modules/.bin:$PATH" \
-    typedoc \
-        --excludePrivate \
-        --excludeProtected \
-        --out "$OUTPUT_DIR" \
-        --plugin typedoc-github-wiki-theme \
-        --plugin typedoc-plugin-markdown \
-        --readme none \
-        --tsconfig ./src/lib/tsconfig.json \
-        ./src/lib/*.ts
+if [ ! -d "$OUTPUT_DIR" ]; then
+    mkdir -p "$OUTPUT_DIR"
+fi
+
+TMP_DIR=$(mktemp -d)
+
+typedoc \
+    --excludeExternals \
+    --excludePrivate \
+    --excludeProtected \
+    --out "$TMP_DIR" \
+    --plugin typedoc-github-wiki-theme \
+    --plugin typedoc-plugin-markdown \
+    --readme none \
+    --tsconfig ./src/lib/tsconfig.json \
+    ./src/lib/*.ts
+
+find "$OUTPUT_DIR" -type f -name "*.md" -delete
+find "$TMP_DIR" -type f -name "*.md" | while read -r FILE; do
+    mv "$FILE" "$OUTPUT_DIR"
+done
