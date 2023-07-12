@@ -1,0 +1,38 @@
+name: Update documentation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-documentation:
+    runs-on: ubuntu-latest
+    container: node:18
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          path: "${{ github.workspace }}/ts-injector"
+
+      - name: Checkout wiki
+        uses: actions/checkout@v2
+        with:
+          repository: "NealRame/ts-injector.wiki"
+          ref: "master"
+          path: "${{ github.workspace }}/ts-injector.wiki"
+
+      - name: Generate documentation
+        run: |
+          npm ci
+          npm run docs
+        env:
+          OUTPUT_DIR: ${{ github.workspace }}/ts-injector.wiki
+        working-directory: ./ts-injector
+
+      - name: Update Wiki
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "update documentation" || true
+          git push
+        working-directory: ./ts-injector.wiki
