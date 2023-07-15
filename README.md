@@ -2,7 +2,6 @@
 A simple Dependency Injection library for Typescript
 
 ## Installation
-
 ```sh
 npm install @nealrame/ts-injector
 ```
@@ -44,5 +43,4 @@ service2.method2()
 The detailed API documentation is available in the [Wiki](https://github.com/NealRame/ts-injector/wiki) of the project.
 
 ## License
-
 [MIT](https://github.com/NealRame/ts-injector/blob/master/LICENSE)
