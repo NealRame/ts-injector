@@ -40,6 +40,9 @@ service2.method2()
 // message from a Service2 instance
 ```
 
+## Documentation
+The detailed API documentation is available in the [Wiki](https://github.com/NealRame/ts-injector/wiki) of the project.
+
 ## License
 
 [MIT](https://github.com/NealRame/ts-injector/blob/master/LICENSE)
