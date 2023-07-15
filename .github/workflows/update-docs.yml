@@ -1,7 +1,9 @@
 name: update-documentation
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   generate-documentation:
