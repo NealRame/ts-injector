@@ -4,6 +4,7 @@ import {
 
 import {
     AliasOrValueUndefined,
+    ServiceInvalidTargetKindError,
     ServiceNotFoundError,
 } from "./errors"
 
@@ -114,9 +115,12 @@ export class Container {
     ) => {
         return (
             target: TConstructor<T>,
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             context: ClassDecoratorContext<TConstructor<T>>,
         ) => {
+            if (context.kind != "class") {
+                throw new ServiceInvalidTargetKindError()
+            }
+
             Object.assign(
                 this._getOrCreateServiceMetadata(target),
                 option ?? {},
