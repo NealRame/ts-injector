@@ -25,6 +25,20 @@ export class AliasOrValueUndefined extends Error {
 }
 
 /**
+ * Thrown when target kind is invalid.
+ */
+export class ServiceInvalidTargetKindError extends Error {
+    public name = "ServiceInvalidTargetKindError"
+
+    /**
+     * @returns the error message.
+     */
+    get message(): string {
+        return "Service expect a class as target."
+    }
+}
+
+/**
  * Thrown when requested service was not found.
  */
 export class ServiceNotFoundError extends Error {
